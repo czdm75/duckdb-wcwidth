@@ -1,0 +1,23 @@
+# name: test/sql/render_width.test
+# description: test render_width extension
+# group: [render_width]
+
+# Before we load the extension, this will fail
+statement error
+SELECT render_width('Sam');
+----
+Catalog Error: Scalar Function with name render_width does not exist!
+
+# Require statement will ensure this test is run with this extension loaded
+require render_width
+
+# Confirm the extension works
+query I
+SELECT render_width('Sam');
+----
+RenderWidth Sam 🐥
+
+query I
+SELECT render_width_openssl_version('Michael') ILIKE 'RenderWidth Michael, my linked OpenSSL version is OpenSSL%';
+----
+true
