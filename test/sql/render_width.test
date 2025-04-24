@@ -15,9 +15,10 @@ require render_width
 query I
 SELECT render_width('Sam');
 ----
-RenderWidth Sam 🐥
+3
 
 query I
-SELECT render_width_openssl_version('Michael') ILIKE 'RenderWidth Michael, my linked OpenSSL version is OpenSSL%';
+SELECT render_width('中文');
 ----
-true
+4
+
