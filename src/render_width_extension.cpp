@@ -8,9 +8,6 @@
 #include "duckdb/main/extension_util.hpp"
 #include <duckdb/parser/parsed_data/create_scalar_function_info.hpp>
 
-#include "duckdb/catalog/catalog.hpp"
-#include "duckdb/common/unique_ptr.hpp"
-
 #include "duckdb/function/udf_function.hpp"
 #include "utf8proc.hpp"
 #include "utf8proc_wrapper.hpp"
@@ -36,7 +33,7 @@ static inline size_t RenderWidth(string_t str) {
 
 static void LoadInternal(DatabaseInstance &instance) {
     // Register a scalar function
-    scalar_function_t function = UDFWrapper::CreateScalarFunction("render_width", RenderWidth);
+    scalar_function_t function = UDFWrapper::CreateScalarFunction("render_width", {LogicalType::VARCHAR}, LogicalType::INTEGER, RenderWidth);
     ScalarFunction render_width_scalar_function = ScalarFunction("render_width", {LogicalType::VARCHAR}, LogicalType::INTEGER, function);
     ExtensionUtil::RegisterFunction(instance, render_width_scalar_function);
 }
