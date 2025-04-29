@@ -15,11 +15,11 @@
 namespace duckdb {
 
 // See duckdb thirdparty/utf8proc/utf8proc_wrapper.cpp
-static inline size_t RenderWidth(string_t str) {
+static inline int32_t RenderWidth(string_t str) {
     const size_t size = str.GetSize();
     const char *str_data = str.GetData();
 
-    size_t render_width = 0;
+    int32_t render_width = 0;
     size_t pos = 0;
     while (pos < size) {
         int sz;
